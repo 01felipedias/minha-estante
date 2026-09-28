@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Minha Estante: organize e acompanhe suas leituras pessoais.">
+  <title>Minha Estante</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex min-h-screen flex-col bg-amber-50 text-stone-800">
+  <header class="bg-stone-900 text-white shadow-lg">
+    <section class="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-5 md:flex-row">
+      <hgroup>
+        <h1 class="text-2xl font-bold tracking-wide"> Minha Estante</h1>
+        <p class="text-sm text-amber-200">Suas leituras em um só lugar</p>
+      </hgroup>
+      <nav aria-label="Navegação principal">
+        <ul class="flex flex-wrap justify-center gap-2 text-sm font-semibold">
+          <li><a class="rounded-lg px-3 py-2 hover:bg-stone-700" href="/">Início</a></li>
+          <li><a class="rounded-lg px-3 py-2 hover:bg-stone-700" href="/livros">Meus Livros</a></li>
+          <li><a class="rounded-lg bg-amber-500 px-3 py-2 text-stone-950 hover:bg-amber-400" href="/livros/novo">Cadastrar Livro</a></li>
+        </ul>
+      </nav>
+    </section>
+  </header>
+  <main class="container mx-auto flex-1 p-4 md:py-10">

@@ -1,0 +1,41 @@
+<%- include("partials/header") %>
+
+<section class="mx-auto max-w-2xl" aria-labelledby="titulo-formulario">
+  <header class="mb-7">
+    <p class="font-bold uppercase tracking-widest text-amber-600">Novo cadastro</p>
+    <h2 id="titulo-formulario" class="text-4xl font-black text-stone-900">Adicionar Livro</h2>
+    <p class="mt-2 text-stone-600">O livro será adicionado com o status “Lendo”.</p>
+  </header>
+
+  <% if (erro) { %>
+    <aside class="mb-5 rounded-xl border border-red-300 bg-red-50 p-4 font-semibold text-red-700" role="alert"><%= erro %></aside>
+  <% } %>
+
+  <form class="rounded-2xl bg-white p-6 shadow-lg md:p-8" action="/livros/novo" method="POST">
+    <fieldset class="grid gap-5">
+      <legend class="mb-5 text-xl font-bold">Informações do livro</legend>
+
+      <label class="grid gap-2 font-semibold" for="titulo">
+        Título do Livro
+        <input class="rounded-xl border border-stone-300 px-4 py-3 font-normal outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200" id="titulo" name="titulo" type="text" value="<%= dados.titulo || '' %>" maxlength="120" required autofocus>
+      </label>
+
+      <label class="grid gap-2 font-semibold" for="autor">
+        Autor
+        <input class="rounded-xl border border-stone-300 px-4 py-3 font-normal outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200" id="autor" name="autor" type="text" value="<%= dados.autor || '' %>" maxlength="100" required>
+      </label>
+
+      <label class="grid gap-2 font-semibold" for="paginas">
+        Quantidade de Páginas
+        <input class="rounded-xl border border-stone-300 px-4 py-3 font-normal outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-200" id="paginas" name="paginas" type="number" value="<%= dados.paginas || '' %>" min="1" required>
+      </label>
+    </fieldset>
+
+    <menu class="mt-7 flex list-none flex-col-reverse gap-3 p-0 sm:flex-row sm:justify-end">
+      <li><a class="block rounded-xl border border-stone-300 px-5 py-3 text-center font-bold hover:bg-stone-100" href="/livros">Cancelar</a></li>
+      <li><button class="w-full rounded-xl bg-amber-500 px-5 py-3 font-bold text-stone-950 shadow hover:bg-amber-400" type="submit">Salvar Livro</button></li>
+    </menu>
+  </form>
+</section>
+
+<%- include("partials/footer") %>

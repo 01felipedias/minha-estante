@@ -1,0 +1,59 @@
+<%- include("partials/header") %>
+
+<section aria-labelledby="titulo-estante">
+  <header class="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+    <hgroup>
+      <p class="font-bold uppercase tracking-widest text-amber-600">Biblioteca pessoal</p>
+      <h2 id="titulo-estante" class="text-4xl font-black text-stone-900">Meus Livros</h2>
+    </hgroup>
+    <a class="rounded-xl bg-amber-500 px-5 py-3 text-center font-bold text-stone-950 shadow hover:bg-amber-400" href="/livros/novo">+ Adicionar livro</a>
+  </header>
+
+  <section class="mb-8 grid gap-4 sm:grid-cols-3" aria-label="Resumo da estante">
+    <article class="rounded-2xl bg-white p-5 shadow">
+      <p class="text-sm font-semibold uppercase text-stone-500">Total de livros</p>
+      <strong class="mt-2 block text-4xl text-stone-900"><%= resumo.total %></strong>
+    </article>
+    <article class="rounded-2xl bg-emerald-50 p-5 shadow">
+      <p class="text-sm font-semibold uppercase text-emerald-700">Concluídos</p>
+      <strong class="mt-2 block text-4xl text-emerald-800"><%= resumo.lidos %></strong>
+    </article>
+    <article class="rounded-2xl bg-amber-100 p-5 shadow">
+      <p class="text-sm font-semibold uppercase text-amber-700">Páginas lidas</p>
+      <strong class="mt-2 block text-4xl text-amber-800"><%= resumo.paginasLidas %></strong>
+    </article>
+  </section>
+
+  <% if (livros.length === 0) { %>
+    <article class="rounded-2xl border-2 border-dashed border-stone-300 bg-white p-12 text-center">
+      <h3 class="text-2xl font-bold">Sua estante está vazia</h3>
+      <p class="mt-2 text-stone-600">Cadastre o primeiro livro para começar.</p>
+      <a class="mt-5 inline-block font-bold text-amber-700 hover:underline" href="/livros/novo">Cadastrar agora</a>
+    </article>
+  <% } else { %>
+    <section class="grid gap-5 md:grid-cols-2 lg:grid-cols-3" aria-label="Livros cadastrados">
+      <% livros.forEach((livro, index) => { %>
+        <article class="flex flex-col rounded-2xl border border-stone-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+          <header class="mb-5">
+            <span class="inline-block rounded-full px-3 py-1 text-xs font-bold <%= livro.status === 'Lido' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800' %>"><%= livro.status %></span>
+            <h3 class="mt-3 text-2xl font-black text-stone-900"><%= livro.titulo %></h3>
+            <p class="mt-1 text-stone-600">por <%= livro.autor %></p>
+          </header>
+          <p class="mb-6 text-sm font-semibold text-stone-500"><%= livro.paginas %> páginas</p>
+          <menu class="mt-auto grid list-none gap-2 p-0">
+            <li>
+              <a class="block rounded-lg bg-stone-900 px-4 py-2 text-center text-sm font-bold text-white hover:bg-stone-700" href="/livros/status/<%= index %>">
+                <%= livro.status === "Lido" ? "Marcar como Lendo" : "Marcar como Lido" %>
+              </a>
+            </li>
+            <li>
+              <a class="block rounded-lg border border-red-300 px-4 py-2 text-center text-sm font-bold text-red-700 hover:bg-red-50" href="/livros/remover/<%= index %>" onclick="return confirm('Deseja excluir este livro da sua estante?')">Remover</a>
+            </li>
+          </menu>
+        </article>
+      <% }); %>
+    </section>
+  <% } %>
+</section>
+
+<%- include("partials/footer") %>
